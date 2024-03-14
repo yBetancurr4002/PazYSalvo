@@ -1,6 +1,6 @@
 /*
 
-# Modelo de base de datos - Sistema de gesti�n de clientes y deudas 
+# Modelo de base de datos - Sistema de gestión de clientes y deudas 
 ## Nombre de la Web App: Paz y Salvo
 
 */
@@ -35,16 +35,32 @@ CREATE TABLE MediosDePago (
     Descripcion NVARCHAR(255)
 );
 
+CREATE TABLE Roles (
+    Id INT PRIMARY KEY IDENTITY (1,1),
+    Nombre VARCHAR(25),
+    Descripcion VARCHAR(100),
+    Activo BIT DEFAULT 0
+
+);
+
 CREATE TABLE Clientes (
     Id INT PRIMARY KEY IDENTITY(1,1),
     PersonaId INT FOREIGN KEY REFERENCES Personas(Id),
+    RolId INT FOREIGN KEY REFERENCES Roles(Id),
+    FechaDeCreación DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Facturas (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    ClienteId INT FOREIGN KEY REFERENCES Clientes(Id),
     ServicioAdquiridoId INT FOREIGN KEY REFERENCES Servicios(Id),
     MedioDePagoId INT FOREIGN KEY REFERENCES MediosDePago(Id),
-	PagoId INT FOREIGN KEY REFERENCES Pagos(Id)    
+	   PagoId INT FOREIGN KEY REFERENCES Pagos(Id),
+    FechaDeCreación DATETIME DEFAULT GETDATE()
 );
 
 CREATE TABLE Pagos (
 	Id INT PRIMARY KEY IDENTITY(1,1),
-	Deuda DECIMAL(10, 2) DEFAULT 0,
+	Monto DECIMAL(10, 2) DEFAULT 0,
 	Estado BIT DEFAULT 0
 );
