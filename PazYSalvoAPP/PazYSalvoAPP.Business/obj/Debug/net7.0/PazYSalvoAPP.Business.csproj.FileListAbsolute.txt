@@ -1,0 +1,12 @@
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\bin\Debug\net7.0\PazYSalvoAPP.Business.deps.json
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\bin\Debug\net7.0\PazYSalvoAPP.Business.dll
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\bin\Debug\net7.0\PazYSalvoAPP.Business.pdb
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.csproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.AssemblyInfoInputs.cache
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.AssemblyInfo.cs
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.dll
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\refint\PazYSalvoAPP.Business.dll
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.pdb
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\ref\PazYSalvoAPP.Business.dll
