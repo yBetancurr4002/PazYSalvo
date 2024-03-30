@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.WebApp
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Factura/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdHVyYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Factura/_ListadoDeFacturas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdHVyYVxfTGlzdGFkb0RlRmFjdHVyYXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

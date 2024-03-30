@@ -6,7 +6,7 @@
 
 ## Crear Capas
 
-### Capa del Modelo de datos, Datos y Lógica de negocio
+### Capa de presentación, Capa del Modelo de datos, Datos y Lógica de negocio
 
 1. Clic derecho en la solución
 2. Agregar, opción Nuevo Proyecto
@@ -14,13 +14,14 @@
 ![](./assets//bibClases.png)
 4. Lo normal será nombrar de la siguiente manera: Proyecto.Models, Proyecto.DLL, Proyecto.BLL
 
-Para la capa de presentación, se creará un proyecto MVC .NET Core
+Para la capa de presentación, se creará un proyecto MVC .NET Core.
+![](./assets/webApp.png)
 
 ### Capa Datos - Configuraciones Iniciales
 Esta capa nos permitirá la conexión a la BD y la utilización de recursos, para esto instalaremos y utilizaremos los siguientes paquetes:
 
-1. Clic derecho en capa datos,
-2. Administrar paquetes Nuget
+1. Clic derecho en capa datos, **Definir proyecto como proyecto de inicio**,
+2. Clic derecho en capa datos, Administrar paquetes Nuget
 3. Instalaremos las siguientes librerías:
     * **EntityFrameWorkCore:** biblioteca principal de Entity Framework Core. Proporciona funcionalidades básicas de mapeo objeto-relacional (ORM) para trabajar con bases de datos en aplicaciones .NET Core. Esta biblioteca incluye las clases y métodos necesarios para definir modelos de datos, realizar consultas, realizar operaciones de actualización y persistir datos en la base de datos.
     * **EntityFrameWorkCore.SqlServer:** es un proveedor específico de base de datos para SQL Server en Entity Framework Core. Proporciona compatibilidad específica para SQL Server, lo que permite a Entity Framework Core interactuar con bases de datos SQL Server de manera eficiente. Esta biblioteca incluye clases y métodos que permiten la generación de consultas SQL específicas de SQL Server, optimizaciones de rendimiento y funcionalidades específicas de este motor de base de datos.
@@ -261,4 +262,225 @@ La referencia entre capas es lo que nos permite dar abstracción a nuestra aplic
 3. Finalmente, nuestra capa de presentación hará referencia a nuestra capa `business` y `models`.
 
 ## Configurar la cadena de conexión
+
+Ubicados en la capa de presentación, abrimos el archivo `appsettings.json`, allí haremos el siguiente ajuste:
+
+1. En `appsettings.json` agregaremos la cadena de conexión configurada inicialmente:
+    * `Data Source=MI_SERVIDOR;Initial Catalog=PazSalvo;Integrated Security=true;Encrypt=True;TrustServerCertificate=true;`
+2. Eliminar del archivo de nuestro contexto la configuración de conexión que está dentro del siguiente método:
+    * `protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)`
+3. En `program.cs` vamos a inyectar la referencia de la cadena de conexión así:
+    ```cs
+        // program.cs
+        // Cadena de conexión
+        builder.Services.AddDbContext<PazSalvoContext>( c =>
+        {
+            c.UseSqlServer(builder.Configuration.GetConnectionString("connString"));
+        });
+    ```
+
+
+**********************************
+
+**********************************
+
+## Configuración del data access layer
+
+Primero crearemos una nueva carpeta para nuestro repositorio, en donde indicaremos las operaciones que vamos a gestionar:
+
+Acá vamos a crear una interfaz, esta (`IGenericRepository`) define un conjunto de métodos para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) genéricas en un repositorio de datos, donde `T` representa el tipo de entidad que se manipulará en el repositorio
+
+1. `public interface IGenericRepository<T> where T : class`: Declara una interfaz pública llamada IGenericRepository que toma un parámetro de tipo genérico T. La interfaz está restringida a tipos de referencia (where T : class). Esto significa que T debe ser una clase y no un tipo de valor.
+
+    ```cs
+    namespace PazYSalvoAPP.Data.Repositories
+    {
+        // Declaración de la interfaz IGenericRepository<T>
+        public interface IGenericRepository<T> where T : class
+        {
+            // Declaración de método para insertar un objeto de tipo T en la base de datos
+            Task<bool> Insertar(T model);
+
+            // Declaración de método para actualizar un objeto de tipo T en la base de datos
+            Task<bool> Actualizar(T model);
+
+            // Declaración de método para leer un objeto de tipo T de la base de datos mediante su identificador único
+            Task<T> Leer(int id);
+
+            // Declaración de método para leer todos los objetos de tipo T de la base de datos
+            // Este método devuelve una consulta IQueryable, que permite realizar operaciones de consulta sobre la colección de objetos de tipo T
+            Task<IQueryable> LeerTodos();
+
+            // Declaración de método para eliminar un objeto de tipo T de la base de datos mediante su identificador único
+            Task<bool> Eliminar(int id);
+        }
+    }
+
+    ```
+
+2. Configura cada uno de tus entidades en donde estas hereden de esta interfaz, como se muestra en el ejemplo a continuación:
+
+    ```cs
+    using Microsoft.EntityFrameworkCore;
+    using PazYSalvoAPP.Data.Context;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    namespace PazYSalvoAPP.Data.Repositories
+    {
+        public class FacturaRepository : IGenericRepository<Factura>
+        {
+            // 1- Establecer conexión
+            private readonly PazSalvoContext _context;
+            public FacturaRepository(PazSalvoContext context)
+            {
+                _context = context;
+            }
+
+            public async Task<bool> Actualizar(Factura model)
+            {
+                bool result = default(bool);
+                try
+                {
+                    _context.Facturas.Update(model);
+                    await _context.SaveChangesAsync();
+
+                    return !result;
+                }
+                catch (Exception ex) 
+                {
+                    return result;
+                }
+            }
+
+            public async Task<bool> Eliminar(int id)
+            {
+                bool result = default(bool);
+                var factura = _context.Facturas.FirstOrDefault(f => f.Id == id);
+                if (factura == null) return result;
+
+                try
+                {
+                    _context.Facturas.Remove(factura);
+                    await _context.SaveChangesAsync();
+
+                    return !result;
+                }
+                catch (Exception ex) 
+                {
+                    return result;
+                }
+            }
+
+            public async Task<bool> Insertar(Factura model)
+            {
+                bool result = default(bool);
+                try
+                {
+                    _context.Facturas.Add(model);
+                    await _context.SaveChangesAsync();
+
+                    return !result;
+                }
+                catch (Exception ex)
+                {
+                    return result;
+                }
+            }
+
+            public async Task<Factura> Leer(int id)
+            {
+                if (id == 0) return null;
+                var factura = _context.Facturas.FirstAsync(f => f.Id == id);
+                if (factura == null) return null;
+
+                return await factura;       
+                
+                            
+            }
+
+            public async Task<IQueryable> LeerTodos()
+            {
+                IQueryable<Factura> listaDeFacturas = _context.Facturas;
+
+                return listaDeFacturas;
+            }
+        }
+    }
+
+    ```
+
+La clase `FacturaRepository` implementa todos los métodos definidos en la interfaz `IGenericRepository<Factura>`. Cada método realiza una operación específica en la base de datos relacionada con las facturas.
+
+
+# Capa Lógica de negocio
+
+1. Crearemos una carpeta de servicios (`services`),
+2. Crearemos una interfaz por cada modelo, en donde se definirá el comportamiento de cada uno de estos,
+3. Finalmente, crearemos una clase asociada a cada una, en donde aplicaremos la lógica que nos permita hacer las distintas operaciones necesarias para nuestro negocio.
+    * **Definición de la clase:** La clase `FacturaService` se encuentra en el espacio de nombres PazYSalvoAPP.Business.Services, lo que indica su función en la capa de lógica de negocio. Implementa la interfaz `IFacturaService`, que contiene las diferentes operaciones que esta podrá implementar.
+    * **Uso del repositorio:** El servicio delega la lógica de acceso a datos a la instancia del repositorio inyectado (`_modelRepository`). Esta separación de responsabilidades promueve la mantenibilidad y la capacidad de prueba del código.
+
+    ```cs
+    using PazYSalvoAPP.Data.Context; // Espacio de nombres para las clases de contexto de datos (probablemente para interacción con la base de datos)
+    using PazYSalvoAPP.Data.Repositories; // Espacio de nombres para interfaces o clases de repositorio (abstracciones para acceso a datos)
+    using System; 
+    using System.Collections.Generic; 
+    using System.Linq; // Para LINQ (Language Integrated Query) para manipulación de datos
+    using System.Text; // Para manipulación de cadenas
+    using System.Threading.Tasks; // Para construcciones de programación asincrónica
+
+    namespace PazYSalvoAPP.Business.Services
+    {
+        public class FacturaService : IFacturaService // La clase FacturaService implementa la interfaz IFacturaService
+        {
+            private readonly IGenericRepository<Factura> _modelRepository; // Campo privado readonly para almacenar el repositorio inyectado
+
+            public FacturaService(IGenericRepository<Factura> modelRepository) // Constructor para inyección de dependencias
+            {
+                _modelRepository = modelRepository; // Asigna el repositorio inyectado al campo
+            }
+
+            public async Task<bool> Actualizar(Factura model) // Método asincrono para actualizar un objeto Factura
+            {
+                return await _modelRepository.Actualizar(model); // Llama al método actualizar del repositorio y devuelve su resultado
+            }
+
+            public async Task<bool> Eliminar(int id) // Método asincrono para eliminar una Factura por ID (aún no implementado)
+            {
+                throw new NotImplementedException(); // marcador de posición para una implementación futura
+            }
+
+            public async Task<bool> Insertar(Factura model) // Método asincrono para insertar un objeto Factura
+            {
+                return await _modelRepository.Insertar(model); // Llama al método insertar del repositorio y devuelve su resultado
+            }
+
+            public async Task<Factura> Leer(int id) // Método asincrono para leer una Factura por ID
+            {
+                return await _modelRepository.Leer(id); // Llama al método leer por ID del repositorio y devuelve su resultado
+            }
+
+            public async Task<IQueryable<Factura>> LeerTodos() // Método asincrono para leer todos los objetos Factura
+            {
+                return await _modelRepository.LeerTodos(); // Llama al método leer todos del repositorio y devuelve un IQueryable para filtrado posterior
+            }
+
+            public async Task<Factura> ObtenerFacturasPorServicio(int id) // Método asincrono para obtener Facturas vinculadas a un ID de Servicio específico
+            {
+                var facturasPorServicio = await _modelRepository.LeerTodos(); // Obtiene todas las Facturas
+                Factura factura = facturasPorServicio.Where(f => f.ServicioAdquiridoId == id).FirstOrDefault(); // Filtra por ID de Servicio y devuelve la primera coincidencia
+
+                return factura; // Devuelve la Factura filtrada o null si no se encuentra ninguna coincidencia
+            }
+        }
+    }
+
+    ```
+
+
+
 

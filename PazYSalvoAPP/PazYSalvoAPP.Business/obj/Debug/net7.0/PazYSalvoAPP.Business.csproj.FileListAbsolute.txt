@@ -10,3 +10,8 @@ C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\P
 C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\refint\PazYSalvoAPP.Business.dll
 C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.pdb
 C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\ref\PazYSalvoAPP.Business.dll
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\bin\Debug\net7.0\PazYSalvoAPP.Data.dll
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\bin\Debug\net7.0\PazYSalvoAPP.Models.dll
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\bin\Debug\net7.0\PazYSalvoAPP.Data.pdb
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\bin\Debug\net7.0\PazYSalvoAPP.Models.pdb
+C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.Business\obj\Debug\net7.0\PazYSalvoAPP.Business.csproj.CopyComplete

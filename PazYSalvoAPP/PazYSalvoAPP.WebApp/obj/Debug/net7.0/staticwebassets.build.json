@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ai331T68hOFQFkseLei9lajwQ4VjrGOq52C7cN0RTlE=",
+  "Hash": "GrY1TjwIAIntwAjD5Lls48Fe6jp9yAzT5rPkgFhRHTg=",
   "Source": "PazYSalvoAPP.WebApp",
   "BasePath": "_content/PazYSalvoAPP.WebApp",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\Documents\\Proyectos\\Articles\\Proyectos\\PazYSalvo\\PazYSalvoAPP\\PazYSalvoAPP.WebApp\\wwwroot\\js\\Factura.js",
+      "SourceId": "PazYSalvoAPP.WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\Documents\\Proyectos\\Articles\\Proyectos\\PazYSalvo\\PazYSalvoAPP\\PazYSalvoAPP.WebApp\\wwwroot\\",
+      "BasePath": "_content/PazYSalvoAPP.WebApp",
+      "RelativePath": "js/Factura.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Factura.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\Documents\\Proyectos\\Articles\\Proyectos\\PazYSalvo\\PazYSalvoAPP\\PazYSalvoAPP.WebApp\\wwwroot\\js\\site.js",

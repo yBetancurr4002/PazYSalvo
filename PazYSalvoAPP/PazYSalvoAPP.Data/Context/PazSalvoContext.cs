@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using PazYSalvoAPP.Models;
 
-namespace PazYSalvoAPP.Data.Context;
+namespace PazYSalvoAPP.Models;
 
 public partial class PazSalvoContext : DbContext
 {
@@ -36,16 +37,17 @@ public partial class PazSalvoContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-88MTFLQ\\SQLEXPRESS;Initial Catalog=PazSalvo;Integrated Security=true;Encrypt=True;TrustServerCertificate=true;");
+    {
+
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cliente>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Clientes__3214EC07C4165C9B");
+            entity.HasKey(e => e.Id).HasName("PK__Clientes__3214EC0768B1D232");
 
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
 
@@ -60,31 +62,28 @@ public partial class PazSalvoContext : DbContext
 
         modelBuilder.Entity<DetallesDeFactura>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Detalles__3214EC0792D3505B");
+            entity.HasKey(e => e.Id).HasName("PK__Detalles__3214EC07DE5B9E42");
 
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
 
             entity.HasOne(d => d.Factura).WithMany(p => p.DetallesDeFacturas)
                 .HasForeignKey(d => d.FacturaId)
-                .HasConstraintName("FK__DetallesD__Factu__73BA3083");
+                .HasConstraintName("FK__DetallesD__Factu__6E01572D");
 
-            entity.HasOne(d => d.Servicio).WithMany(p => p.DetallesDeFacturas)
-                .HasForeignKey(d => d.ServicioId)
-                .HasConstraintName("FK__DetallesD__Servi__74AE54BC");
+            entity.HasOne(d => d.Pago).WithMany(p => p.DetallesDeFacturas)
+                .HasForeignKey(d => d.PagoId)
+                .HasConstraintName("FK__DetallesD__PagoI__6EF57B66");
         });
 
         modelBuilder.Entity<Estado>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Estados__3214EC0728D092FD");
+            entity.HasKey(e => e.Id).HasName("PK__Estados__3214EC07800A561E");
 
             entity.Property(e => e.Descripcion)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.FechaDeCreación)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(25)
                 .IsUnicode(false);
@@ -92,9 +91,9 @@ public partial class PazSalvoContext : DbContext
 
         modelBuilder.Entity<Factura>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Facturas__3214EC07E69AE139");
+            entity.HasKey(e => e.Id).HasName("PK__Facturas__3214EC07BC5E51CA");
 
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Saldo)
@@ -103,29 +102,29 @@ public partial class PazSalvoContext : DbContext
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.ClienteId)
-                .HasConstraintName("FK__Facturas__Client__6D0D32F4");
+                .HasConstraintName("FK__Facturas__Client__619B8048");
 
             entity.HasOne(d => d.Estado).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.EstadoId)
-                .HasConstraintName("FK__Facturas__Estado__6FE99F9F");
+                .HasConstraintName("FK__Facturas__Estado__6477ECF3");
 
             entity.HasOne(d => d.MedioDePago).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.MedioDePagoId)
-                .HasConstraintName("FK__Facturas__MedioD__6EF57B66");
+                .HasConstraintName("FK__Facturas__MedioD__6383C8BA");
 
             entity.HasOne(d => d.ServicioAdquirido).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.ServicioAdquiridoId)
-                .HasConstraintName("FK__Facturas__Servic__6E01572D");
+                .HasConstraintName("FK__Facturas__Servic__628FA481");
         });
 
         modelBuilder.Entity<MediosDePago>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__MediosDe__3214EC07C45655C3");
+            entity.HasKey(e => e.Id).HasName("PK__MediosDe__3214EC072DC27202");
 
             entity.ToTable("MediosDePago");
 
             entity.Property(e => e.Descripcion).HasMaxLength(255);
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Nombre).HasMaxLength(100);
@@ -133,10 +132,10 @@ public partial class PazSalvoContext : DbContext
 
         modelBuilder.Entity<Pago>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pagos__3214EC07E6CE7979");
+            entity.HasKey(e => e.Id).HasName("PK__Pagos__3214EC078704C71A");
 
             entity.Property(e => e.Activo).HasDefaultValueSql("((1))");
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.MontoDePago)
@@ -145,16 +144,16 @@ public partial class PazSalvoContext : DbContext
 
             entity.HasOne(d => d.Factura).WithMany(p => p.Pagos)
                 .HasForeignKey(d => d.FacturaId)
-                .HasConstraintName("FK__Pagos__FacturaId__797309D9");
+                .HasConstraintName("FK__Pagos__FacturaId__693CA210");
         });
 
         modelBuilder.Entity<Persona>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Personas__3214EC07946D6505");
+            entity.HasKey(e => e.Id).HasName("PK__Personas__3214EC07959AA70C");
 
             entity.Property(e => e.CorreoElectronico).HasMaxLength(100);
             entity.Property(e => e.DocumentoIdentificacion).HasMaxLength(20);
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Nombres).HasMaxLength(100);
@@ -163,13 +162,13 @@ public partial class PazSalvoContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Roles__3214EC076CAC20FF");
+            entity.HasKey(e => e.Id).HasName("PK__Roles__3214EC07897A08BD");
 
             entity.Property(e => e.Activo).HasDefaultValueSql("((0))");
             entity.Property(e => e.Descripcion)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Nombre)
@@ -179,10 +178,10 @@ public partial class PazSalvoContext : DbContext
 
         modelBuilder.Entity<Servicio>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Servicio__3214EC07D6BED408");
+            entity.HasKey(e => e.Id).HasName("PK__Servicio__3214EC0715665506");
 
             entity.Property(e => e.Descripcion).HasMaxLength(255);
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Nombre).HasMaxLength(100);
@@ -191,10 +190,10 @@ public partial class PazSalvoContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC07B61F1220");
+            entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC075BD745D6");
 
             entity.Property(e => e.Contrasena).HasMaxLength(100);
-            entity.Property(e => e.FechaDeCreación)
+            entity.Property(e => e.FechaDeCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.NombreUsuario).HasMaxLength(50);

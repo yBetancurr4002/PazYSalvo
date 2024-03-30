@@ -1,0 +1,123 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container">
+    <h2>Administrador de facturas</h2>
+    <p class="descripcion">
+        Este administrador nos permite visualizar y gestionar todo lo referente a las Facturas del negocio.
+    </p>
+
+    <div class="opciones-container">
+        <a class="btn btn-primary btn-sm"id="btnVerFacturas">Ver Facturas</a>
+        <a class="btn btn-success btn-sm visually-hidden" id="btnNuevaFactura">Nueva factura</a>
+    </div>
+
+    <div id="tblListaDeFacturas">
+
+    </div>
+</div>
+
+@*MODAL*@
+<div class="modal-container">
+    <div class="modal" id="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloModal"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form asp-action="AgregarFacturas" asp-controller="Factura" id="frmModalFactura">
+                    <div class="modal-body">
+                    
+                            <div class="form-group">
+                            
+                                <input type="hidden" class="form-control" id="IdValor">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="SaldoValor">Saldo</label>
+                                <input type="text" class="form-control" id="SaldoValor">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ClienteValor">Cliente</label>
+                                <input type="text" class="form-control" id="ClienteValor">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ServicioValor">Servicio Adquirido</label>
+                                <input type="text" class="form-control" id="ServicioValor">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="MedioPagoValor">Medio de Pago</label>
+                                <input type="text" class="form-control" id="MedioPagoValor">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="EstadoValor">Estado</label>
+                                <input type="text" class="form-control" id="EstadoValor">
+                            </div>                        
+                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="btnActualizarFactura">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+@*FIN MODAL*@
+
+<script src="./js/Factura.js"></script>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btnVerFacturas").click(async function () {
+                const url = "@Url.Action("ListarFacturas", "Factura")";
+                const response = await $.ajax({
+                    url: url,
+                    method: "GET",
+                    dataType: "html"
+                });
+
+                $("#tblListaDeFacturas").html(response);
+                $("#btnVerFacturas").hide();
+                $("#btnNuevaFactura").removeClass("visually-hidden"); // visually-hidden
+
+            });
+
+            $("#btnNuevaFactura").click(function () {
+                mostrarModal();
+            });
+        });
+                
+        const facturaVacia = {
+            Saldo: 0,
+            Cliente: "",
+            MedioDePago: "",
+            ServicioAdquirido: "",
+            Estado: ""
+
+        }
+
+        function mostrarModal() {
+            
+                // Actualiza el título de la modal
+                $("#tituloModal").text("Nueva Factura");
+
+                // Limpia los campos del formulario
+                $("#frmModalFactura").trigger("reset");
+
+                // Muestra la modal
+                $("#modal").modal("show");
+            
+        }
+    </script>
+}
