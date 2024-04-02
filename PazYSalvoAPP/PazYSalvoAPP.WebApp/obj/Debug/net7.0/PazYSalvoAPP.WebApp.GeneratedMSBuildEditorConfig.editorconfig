@@ -9,45 +9,45 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PazYSalvoAPP.WebApp
 build_property.RootNamespace = PazYSalvoAPP.WebApp
-build_property.ProjectDir = C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.WebApp\
+build_property.ProjectDir = D:\Documentos\Github\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.WebApp\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Usuario\Documents\Proyectos\Articles\Proyectos\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.WebApp
+build_property.MSBuildProjectDirectory = D:\Documentos\Github\PazYSalvo\PazYSalvoAPP\PazYSalvoAPP.WebApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Factura/Index.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Factura/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdHVyYVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Factura/_ListadoDeFacturas.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Factura/_ListadoDeFacturas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdHVyYVxfTGlzdGFkb0RlRmFjdHVyYXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Home/Index.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Home/Privacy.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Shared/Error.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/_ViewImports.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/_ViewStart.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/Proyectos/Articles/Proyectos/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Shared/_Layout.cshtml]
+[D:/Documentos/Github/PazYSalvo/PazYSalvoAPP/PazYSalvoAPP.WebApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-cpppvvypvy
