@@ -2,7 +2,7 @@
 
 ## Crear proyecto
 
-1. Crear solución en blanco
+1. Crear solución en blanco: PazYSalvoAPP
 
 ## Crear Capas
 
