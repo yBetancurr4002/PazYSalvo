@@ -67,10 +67,14 @@ namespace PazYSalvoAPP.Data.Repositories
         public async Task<bool> Insertar(Factura model)
         {
             bool result = default(bool); // Inicialización de una variable booleana llamada result
-
+            using (var context = new PazSalvoContext())
+            {
+                // Realizar operaciones con el contexto
+            }
             try
             {
-                _context.Facturas.Add(model); // Agregar la factura al contexto
+                var factura = new FacturaRepository(_context);
+                _context.Facturas.AddAsync(model); // Agregar la factura al contexto
                 await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
 
                 return !result; // Devolver el valor inverso de result (true si se insertó correctamente, false si no)

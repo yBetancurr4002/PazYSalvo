@@ -17,7 +17,9 @@ builder.Services.AddDbContext<PazSalvoContext>( c =>
 
 // Inyectar dependencias necesarias
 builder.Services.AddScoped<IGenericRepository<Factura>, FacturaRepository>();
-builder.Services.AddScoped<IFacturaService, FacturaService>();
+builder.Services.AddScoped<FacturaService, FacturaService>();
+builder.Services.AddScoped<IGenericRepository<Estado>, EstadoRepository>();
+builder.Services.AddScoped<EstadoService, EstadoService>();
 
 
 var app = builder.Build();

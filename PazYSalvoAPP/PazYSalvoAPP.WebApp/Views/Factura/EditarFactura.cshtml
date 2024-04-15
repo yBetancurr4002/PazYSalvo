@@ -1,0 +1,97 @@
+﻿@using PazYSalvoAPP.Models;
+@model IEnumerable<PazYSalvoAPP.WebApp.Models.ViewModels.FacturaViewModel>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@*MODAL*@
+<div class="modal-container">
+    <div class="modal" id="modalEditar" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloModal"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form asp-action="AgregarFacturas" asp-controller="Factura" id="frmModalFactura">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="Id" name="Id">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Saldo">Saldo</label>
+                            <input type="number" class="form-control" id="Saldo" name="Saldo" required>
+                        </div>
+                        <br />
+
+                        <div class="form-group">
+                            <label for="ClienteId">Cliente</label>
+                            <select class="form-select" id="ClienteId" name="ClienteId">
+                                <option value="">Selecciona un cliente</option>
+                                @foreach (var cliente in ViewBag.Clientes as List<Cliente>)
+                                {
+                                    <option value="@cliente.Id">@cliente.Id</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="ServicioAdquiridoId">Servicio Adquirido</label>
+
+                            <select class="form-select" id="ServicioAdquiridoId" name="ServicioAdquiridoId" required>
+                                <option value="">Selecciona un servicio</option>
+                                @foreach (var servicio in ViewBag.servicios as List<Servicio>)
+                                {
+                                    <option value="@servicio.Id">@servicio.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="MedioDePagoId">Medio de Pago</label>
+
+                            <select class="form-select" id="MedioDePagoId" name="MedioDePagoId" required>
+                                <option value="">Selecciona un medio de pago</option>
+                                @foreach (var medio in ViewBag.mediosDePago as List<MediosDePago>)
+                                {
+                                    <option value="@medio.Id">@medio.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="EstadoId">Estado</label>
+
+                            <select class="form-select" id="EstadoId" name="EstadoId" required>
+                                <option value="">Selecciona el estado</option>
+                                @foreach (var estado in ViewBag.estados as List<Estado>)
+                                {
+                                    <option value="@estado.Id">@estado.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="btnActualizarFactura">Agregar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        
+
+    </script>
+}                            

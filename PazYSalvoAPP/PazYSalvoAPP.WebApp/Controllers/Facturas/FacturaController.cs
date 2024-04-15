@@ -7,13 +7,37 @@ namespace PazYSalvoAPP.WebApp.Controllers.Facturas
 {
     public class FacturaController : Controller
     {
-        private readonly IFacturaService _facturaService;
-        public FacturaController(IFacturaService facturaService)
+        private readonly FacturaService _facturaService;
+        public FacturaController(FacturaService facturaService)
         {
             _facturaService = facturaService;
         }
         public IActionResult Index()
         {
+            // Clientes
+            List<Cliente> clientes = _facturaService.ObtenerClientes();
+
+            // Pasar los datos a la vista
+            ViewBag.Clientes = clientes;
+
+            // estados
+            List<Estado> estados = _facturaService.ObtenerEstados();
+
+            // Pasar los datos a la vista
+            ViewBag.estados = estados;
+
+            // servicios
+            List<Servicio> servicios = _facturaService.ObtenerServicios();
+
+            // Pasar los datos a la vista
+            ViewBag.servicios = servicios;
+
+            // medios
+            List<MediosDePago> mediosDePago = _facturaService.ObtenerMediosDePago();
+
+            // Pasar los datos a la vista
+            ViewBag.mediosDePago = mediosDePago;
+
             return View();
         }
 
@@ -22,15 +46,14 @@ namespace PazYSalvoAPP.WebApp.Controllers.Facturas
         {
             IQueryable<Factura>? consultaDeFacturas = await _facturaService.LeerTodos();
 
-            List<FacturaViewModel> listadoDeFacturas = consultaDeFacturas.Select(f => new FacturaViewModel
+            List<Factura> listadoDeFacturas = consultaDeFacturas.Select(f => new Factura
             {
                 Id = f.Id,
                 Saldo = f.Saldo,
                 ClienteId = f.ClienteId,
                 ServicioAdquiridoId = f.ServicioAdquiridoId,
                 MedioDePagoId = f.MedioDePagoId,
-                EstadoId = f.EstadoId,
-                
+                EstadoId = f.EstadoId,               
 
             }).ToList();
 
@@ -47,14 +70,20 @@ namespace PazYSalvoAPP.WebApp.Controllers.Facturas
                 ServicioAdquiridoId = model.ServicioAdquiridoId,
                 MedioDePagoId = model.MedioDePagoId,
                 EstadoId= model.EstadoId,
-
             };
 
             bool response = await _facturaService.Insertar(factura);
 
-            return StatusCode(StatusCodes.Status200OK,
-                              new {valor = response });
+            if (response)
+            {
 
+                return Json(new { success = true, message = "Factura agregada con éxito" });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Error al agregar la factura" });
+            }
+                       
         }
 
         [HttpPost]
@@ -78,6 +107,12 @@ namespace PazYSalvoAPP.WebApp.Controllers.Facturas
 
         }
 
+        public IActionResult EditarFacturas(int id)
+        {
+            var factura = _facturaService.Leer(id);
+
+            return PartialView("EditarFactura", factura);
+        }
     }
 
 }

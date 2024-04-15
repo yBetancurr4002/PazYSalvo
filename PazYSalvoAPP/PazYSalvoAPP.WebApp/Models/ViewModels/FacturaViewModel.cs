@@ -4,8 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PazYSalvoAPP.WebApp.Models.ViewModels
 {
     public class FacturaViewModel
-    {
-        
+    {        
 
         public int Id { get; set; }
 
@@ -24,7 +23,7 @@ namespace PazYSalvoAPP.WebApp.Models.ViewModels
 
         public virtual Cliente? Cliente { get; set; }
 
-        public virtual ICollection<DetallesDeFactura> DetallesDeFacturas { get; set; } = new List<DetallesDeFactura>();
+        //public virtual ICollection<DetallesDeFactura> DetallesDeFacturas { get; set; } = new List<DetallesDeFactura>();
 
         public virtual Estado? Estado { get; set; }
 

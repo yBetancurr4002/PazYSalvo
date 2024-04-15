@@ -1,10 +1,18 @@
-﻿@*
+﻿@using PazYSalvoAPP.Models;
+@model IEnumerable<PazYSalvoAPP.WebApp.Models.ViewModels.FacturaViewModel>
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    
+    
 }
 
-<div class="container">
+<div class="container"
+     id="facturaContainer"
+     data-listarfacturas="@Url.Action("ListarFacturas", "Factura")"
+     data-actualizaracturas="@Url.Action("AgregarFacturas", "Factura")">
+
     <h2>Administrador de facturas</h2>
     <p class="descripcion">
         Este administrador nos permite visualizar y gestionar todo lo referente a las Facturas del negocio.
@@ -31,43 +39,71 @@
                 </div>
                 <form asp-action="AgregarFacturas" asp-controller="Factura" id="frmModalFactura">
                     <div class="modal-body">
-                    
-                            <div class="form-group">
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="Id" name="Id">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Saldo">Saldo</label>
+                            <input type="number" class="form-control" id="Saldo" name="Saldo" required>
+                        </div>
+                        <br />
+
+                        <div class="form-group">
+                            <label for="ClienteId">Cliente</label>
+                            <select class="form-select" id="ClienteId" name="ClienteId">
+                                <option value="">Selecciona un cliente</option>
+                                @foreach (var cliente in ViewBag.Clientes as List<Cliente>)
+                                {
+                                    <option value="@cliente.Id">@cliente.Id</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="ServicioAdquiridoId">Servicio Adquirido</label>
                             
-                                <input type="hidden" class="form-control" id="IdValor">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="SaldoValor">Saldo</label>
-                                <input type="text" class="form-control" id="SaldoValor">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ClienteValor">Cliente</label>
-                                <input type="text" class="form-control" id="ClienteValor">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ServicioValor">Servicio Adquirido</label>
-                                <input type="text" class="form-control" id="ServicioValor">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="MedioPagoValor">Medio de Pago</label>
-                                <input type="text" class="form-control" id="MedioPagoValor">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="EstadoValor">Estado</label>
-                                <input type="text" class="form-control" id="EstadoValor">
-                            </div>                        
-                    
+                            <select class="form-select" id="ServicioAdquiridoId" name="ServicioAdquiridoId" required>
+                                <option value="">Selecciona un servicio</option>
+                                @foreach (var servicio in ViewBag.servicios as List<Servicio>)
+                                {
+                                    <option value="@servicio.Id">@servicio.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="MedioDePagoId">Medio de Pago</label>
+                            
+                            <select class="form-select" id="MedioDePagoId" name="MedioDePagoId" required>
+                                <option value="">Selecciona un medio de pago</option>
+                                @foreach (var medio in ViewBag.mediosDePago as List<MediosDePago>)
+                                {
+                                    <option value="@medio.Id">@medio.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="EstadoId">Estado</label>
+                            
+                            <select class="form-select" id="EstadoId" name="EstadoId" required>
+                                <option value="">Selecciona el estado</option>
+                                @foreach (var estado in ViewBag.estados as List<Estado>)
+                                {
+                                    <option value="@estado.Id">@estado.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                        <br />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" id="btnActualizarFactura">Agregar</button>
+                        <button type="button" class="btn btn-primary" id="btnActualizarFactura">Agregar</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -75,7 +111,8 @@
 </div>
 @*FIN MODAL*@
 
-<script src="./js/Factura.js"></script>
+@*<script src="./js/Factura.js" crossorigin="anonymous"></script>*@
+
 @section Scripts {
     <script>
         $(document).ready(function () {
@@ -90,34 +127,79 @@
                 $("#tblListaDeFacturas").html(response);
                 $("#btnVerFacturas").hide();
                 $("#btnNuevaFactura").removeClass("visually-hidden"); // visually-hidden
-
             });
 
             $("#btnNuevaFactura").click(function () {
                 mostrarModal();
             });
-        });
-                
-        const facturaVacia = {
-            Saldo: 0,
-            Cliente: "",
-            MedioDePago: "",
-            ServicioAdquirido: "",
-            Estado: ""
 
-        }
+            $("#btnActualizarFactura").click(async function () {
+                const url = "@Url.Action("AgregarFacturas", "Factura")";
+                const $formulario = $('#frmModalFactura'); // captura contenido form
+                var factura = {
+                    //id: $('#id').val(),
+                    saldo: $formulario.find('#Saldo').val(),
+                    clienteid: $formulario.find('#ClienteId').val(),
+                    servicioadquiridoid: $formulario.find('#ServicioAdquiridoId').val(),
+                    mediodepagoid: $formulario.find('#MedioDePagoId').val(),
+                    estadoid: $formulario.find('#EstadoId').val()
+                };
+                //console.log(factura);
+                const response = await $.ajax({
+                    url: url,
+                    method: "post",
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(factura), // Serializa a JSON
+                    success: function () {
+                        alert("Factura agregada con éxito");
+                        $("#modal").modal("hide");
+                    },
+                    error: function (jqxhr, textstatus, errorthrown) {
+                        
+                        console.error("error adding invoice:", textstatus, errorthrown);
+                            
+                        alert("error! no se agregó factura");
+                        $("#modal").modal("hide");
+                    },
+               });
+                
+            });
+            );
+            $(".btnEditarFactura").on('click', function () {
+                debugger;
+                const url = "@Url.Action("EditarFactura", "Factura")";
+                const id = $(this).data('id');
+
+                console.log('log');
+                //console.log(factura);
+                $.ajax({
+                    url: url,
+                    method: "get",
+                    data: id,
+                    dataType: "html",
+                    success: function (data) { // Agrega el parámetro 'data' aquí
+                        $("#modalEditar").html(data);
+                        $("#modalEditar").modal("show");
+                    },
+                    error: function (jqxhr, textstatus, errorthrown) {
+
+                        console.error("error adding invoice:", textstatus, errorthrown);
+
+                        alert("error! no se agregó factura");
+                        $("#modal").modal("hide");
+                    },
+                });
+
+            });
+
+        });
 
         function mostrarModal() {
-            
-                // Actualiza el título de la modal
-                $("#tituloModal").text("Nueva Factura");
-
-                // Limpia los campos del formulario
-                $("#frmModalFactura").trigger("reset");
-
-                // Muestra la modal
-                $("#modal").modal("show");
-            
+            $("#tituloModal").text("Nueva Factura");
+            $("#frmModalFactura").trigger("reset");
+            $("#modal").modal("show");
         }
+
     </script>
 }

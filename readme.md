@@ -2,7 +2,11 @@
 
 ## Crear proyecto
 
+<<<<<<< Updated upstream
 1. Crear solución en blanco: PazYSalvoAPP
+=======
+1. Crear solución en blanco: **PazYSalvoAPP**
+>>>>>>> Stashed changes
 
 ## Crear Capas
 
@@ -34,7 +38,7 @@ Una vez instalados los paquetes, agregaremos unos cuantos recursos más de forma
 2. Establecer esta capa como proyecto de inicio
 3. Enlazar nuestro modelo de datos a nuestra bd
     * `Scaffold-DbContext "Server=(local); DataBase=PazYSalvo; Integrated Security=true"  Microsoft.EntityFrameworkCore.SqlServer -OutputDir context`
-    * `Scaffold-DbContext "Data Source=NOMBRE_SERVIDOR;Initial Catalog=PazSalvo;Integrated Security=true;Encrypt=True;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Context`.
+    * Scaffold-DbContext "Data Source=DESKTOP-88MTFLQ\SQLEXPRESS;Initial Catalog=PazSalvo;Integrated Security=true;Encrypt=True;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Context.
 
 Una vez establecida nuestra conexión, podremos visualizar el contexto asociado a nuestro modelo de datos:
 
