@@ -11,7 +11,8 @@
 <div class="container"
      id="facturaContainer"
      data-listarfacturas="@Url.Action("ListarFacturas", "Factura")"
-     data-actualizaracturas="@Url.Action("AgregarFacturas", "Factura")">
+     data-actualizarfacturas="@Url.Action("AgregarFacturas", "Factura")"
+     data-editarfacturas="@Url.Action("EditarFacturas", "Factura")">
 
     <h2>Administrador de facturas</h2>
     <p class="descripcion">
@@ -111,7 +112,13 @@
 </div>
 @*FIN MODAL*@
 
-@*<script src="./js/Factura.js" crossorigin="anonymous"></script>*@
+@*@section scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="@Url.Content("../../wwwroot/js/Factura.js")"></script>
+}*@
+
 
 @section Scripts {
     <script>
@@ -165,33 +172,36 @@
                });
                 
             });
-            );
-            $(".btnEditarFactura").on('click', function () {
-                debugger;
-                const url = "@Url.Action("EditarFactura", "Factura")";
-                const id = $(this).data('id');
+            
+            //$(document).on('click', ".btnEditarFactura", async function () {
+                
+            //    const url = "@Url.Action("EditarFacturas", "Factura")";
+            //    const id = $(this).data('id');
 
-                console.log('log');
-                //console.log(factura);
-                $.ajax({
-                    url: url,
-                    method: "get",
-                    data: id,
-                    dataType: "html",
-                    success: function (data) { // Agrega el parámetro 'data' aquí
-                        $("#modalEditar").html(data);
-                        $("#modalEditar").modal("show");
-                    },
-                    error: function (jqxhr, textstatus, errorthrown) {
+            //    // abrirModalEditar(id);
 
-                        console.error("error adding invoice:", textstatus, errorthrown);
+            //    // console.log('log');
+            //    //console.log(factura);
+            //    const response = await $.ajax({
+            //        url: url,
+            //        method: "get",
+            //        data: {id: id},
+            //        // dataType: "html",
+            //        success: function () { // Agrega el parámetro 'data' aquí
+                        
+            //        },
+            //        error: function () {
+            //            alert("error!");
+            //            $("#modal").modal("hide");
+            //        },
 
-                        alert("error! no se agregó factura");
-                        $("#modal").modal("hide");
-                    },
-                });
+                    
+            //    });
 
-            });
+            //    $("#modalEditar").html(response);
+            //    $("#modalEditar").modal("show");
+
+            //});
 
         });
 
@@ -201,5 +211,6 @@
             $("#modal").modal("show");
         }
 
+        
     </script>
 }

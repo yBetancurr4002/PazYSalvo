@@ -1,4 +1,5 @@
-﻿using PazYSalvoAPP.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PazYSalvoAPP.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace PazYSalvoAPP.WebApp.Models.ViewModels
@@ -37,6 +38,6 @@ namespace PazYSalvoAPP.WebApp.Models.ViewModels
             
         }
 
-       
+
     }
 }

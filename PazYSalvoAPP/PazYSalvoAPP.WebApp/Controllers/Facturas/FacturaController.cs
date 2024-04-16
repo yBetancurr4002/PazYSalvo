@@ -107,11 +107,44 @@ namespace PazYSalvoAPP.WebApp.Controllers.Facturas
 
         }
 
-        public IActionResult EditarFacturas(int id)
+        public async Task<IActionResult> EditarFacturas(int id)
         {
-            var factura = _facturaService.Leer(id);
+            var factura = await _facturaService.Leer(id);
+            FacturaViewModel facturaAEditar = new FacturaViewModel() 
+            { 
+                Saldo = factura.Saldo,
+                ClienteId= factura.ClienteId,
+                ServicioAdquiridoId = factura.ServicioAdquiridoId,
+                MedioDePagoId = factura.MedioDePagoId,
+                EstadoId= factura.EstadoId,
 
-            return PartialView("EditarFactura", factura);
+            };
+
+            // Clientes
+            List<Cliente> clientes = _facturaService.ObtenerClientes();
+
+            // Pasar los datos a la vista
+            ViewBag.Clientes = clientes;
+
+            // estados
+            List<Estado> estados = _facturaService.ObtenerEstados();
+
+            // Pasar los datos a la vista
+            ViewBag.estados = estados;
+
+            // servicios
+            List<Servicio> servicios = _facturaService.ObtenerServicios();
+
+            // Pasar los datos a la vista
+            ViewBag.servicios = servicios;
+
+            // medios
+            List<MediosDePago> mediosDePago = _facturaService.ObtenerMediosDePago();
+
+            // Pasar los datos a la vista
+            ViewBag.mediosDePago = mediosDePago;
+
+            return View("EditarFacturas", facturaAEditar);
         }
     }
 

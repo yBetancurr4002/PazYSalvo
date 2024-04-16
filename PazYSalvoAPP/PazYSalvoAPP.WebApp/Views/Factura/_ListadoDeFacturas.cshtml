@@ -30,7 +30,7 @@
                         <td>@item.MedioDePagoId</td>
                         <td>@item.EstadoId</td>
                         <td>
-                        <a class="btn btn-info btn-sm btnEditarFactura" id="btnEditarFactura" data-id="@item.Id">Editar</a>
+                            <a class="btn btn-info btn-sm btnEditarFactura" href="@Url.Action("EditarFacturas", "Factura", new { id = item.Id })">Editar</a>
                             <a class="btn btn-warning btn-sm disabled">Eliminar</a>
                         </td>
                 </tr>
@@ -41,8 +41,3 @@
     </table>
 </div>
 
-@section Scripts{
-    <script>
-
-    </script>
-}
