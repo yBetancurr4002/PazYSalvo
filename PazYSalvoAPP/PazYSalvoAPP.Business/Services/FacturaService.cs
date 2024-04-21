@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace PazYSalvoAPP.Business.Services
 {
@@ -16,6 +17,7 @@ namespace PazYSalvoAPP.Business.Services
         {
             _context = context;
         }
+        
         public async Task<bool> Actualizar(Factura model)
         {
             bool result = default(bool); // Inicialización de una variable booleana llamada result
@@ -26,10 +28,12 @@ namespace PazYSalvoAPP.Business.Services
 
             try
             {
-                // Buscar la factura por su ID
                 Factura factura = await Leer(facturaId);
 
-                factura.Saldo = model.Saldo;
+                decimal saldo;
+                saldo = Convert.ToDecimal(model.Saldo, CultureInfo.InvariantCulture);
+                                
+                factura.Saldo = saldo;
                 factura.ClienteId = model.ClienteId;
                 factura.ServicioAdquiridoId = model.ServicioAdquiridoId;
                 factura.MedioDePagoId = model.MedioDePagoId;

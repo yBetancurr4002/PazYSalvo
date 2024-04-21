@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore; // Referencia para configurar cadena de conexión
 using PazYSalvoAPP.Business.Services;
-using PazYSalvoAPP.Data.Repositories;
+// using PazYSalvoAPP.Data.Repositories;
 using PazYSalvoAPP.Models;
 
 
@@ -16,10 +16,10 @@ builder.Services.AddDbContext<PazSalvoContext>( c =>
 });
 
 // Inyectar dependencias necesarias
-builder.Services.AddScoped<IGenericRepository<Factura>, FacturaRepository>();
-builder.Services.AddScoped<FacturaService, FacturaService>();
-builder.Services.AddScoped<IGenericRepository<Estado>, EstadoRepository>();
-builder.Services.AddScoped<EstadoService, EstadoService>();
+builder.Services.AddScoped<IFacturaService, FacturaService>();
+
+builder.Services.AddScoped<IEstadoService, EstadoService>();
+builder.Services.AddScoped<IServicioService, ServicioService>();
 
 
 var app = builder.Build();
@@ -32,6 +32,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
 
 app.UseAuthorization();
 

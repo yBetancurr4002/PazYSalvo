@@ -1,4 +1,5 @@
-﻿using PazYSalvoAPP.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PazYSalvoAPP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,9 @@ namespace PazYSalvoAPP.Business.Services
         Task<bool> Eliminar(int id);
 
         Task<Factura> ObtenerFacturasPorServicio(int servicioId);
+        List<Cliente> ObtenerClientes();
+        List<Estado> ObtenerEstados();
+        List<MediosDePago> ObtenerMediosDePago();
+        List<Servicio> ObtenerServicios();
     }
 }
